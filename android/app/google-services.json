@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "356644397945",
+    "project_id": "activity16-ff00d",
+    "storage_bucket": "activity16-ff00d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356644397945:android:9323769af175ac192785a8",
+        "android_client_info": {
+          "package_name": "com.example.ica16_quiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ0DjLfPrcsTKRrr11eksQRGqDdc75x7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

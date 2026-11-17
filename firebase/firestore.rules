@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid}/attempts/{roundId} {
+      // Only the owner can read their own attempts.
+      allow read: if request.auth != null && request.auth.uid == uid;
+
+      // Only the owner can create, and only a valid Class A shape.
+      // Rules check shape and ownership, not honesty of the score (see Q4).
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+             'schemaVersion', 'variant', 'categoryId',
+             'questionCount', 'correctCount', 'submittedAt'])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.variant == 'A'
+        && request.resource.data.categoryId == 9
+        && request.resource.data.questionCount == 10
+        && request.resource.data.correctCount is int
+        && request.resource.data.correctCount >= 0
+        && request.resource.data.correctCount <= 10
+        && request.resource.data.submittedAt == request.time;
+
+      // Attempts are immutable.
+      allow update, delete: if false;
+    }
+  }
+}
